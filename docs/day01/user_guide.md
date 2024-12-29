@@ -61,14 +61,16 @@ Final Floor: 2
 ## 5 Error Handling
 The program handles common errors gracefully and provides detailed error messages.
 
-| **Error Type**                     | **Cause**                                                      | **Message**                                                                                 |
-|------------------------------------|----------------------------------------------------------------|---------------------------------------------------------------------------------------------|
-| **File Not Found**                 | The specified file path does not exist.                        | `The resource "<FILE_PATH>" does not exist`                                                 |
-| **Path Is Not a File**             | The specified path is a directory or non-file resource.        | `The resource "<FILE_PATH>" is not a file`                                                  |
-| **File Not Accessible**            | The file lacks read permissions.                               | `The file "<FILE_PATH>" is not accessible`                                                  |
-| **Invalid Characters in Sequence** | The input file contains characters other than `"("` and `")"`. | `Malformed directions sequence, please verify that it contains only "(" and ")" characters` |
-| **Unexpected Encoding**            | The file is not encoded in UTF-8.                              | `The file "<FILE_PATH>" is not UTF-8 encoded`                                               |
-| **Critical Failure**               | An unexpected error occurs.                                    | `Cause: <ERROR_MESSAGE>`                                                                    |
+| **Error Type**                     | **Cause**                                                      | **Message**                                                          |
+|------------------------------------|----------------------------------------------------------------|----------------------------------------------------------------------|
+| **File Not Found**                 | The specified file path does not exist.                        | `The resource "<FILE_PATH>" does not exist`                          |
+| **Path Is Not a File**             | The specified path is a directory or non-file resource.        | `The resource "<FILE_PATH>" is not a file`                           |
+| **File Not Accessible**            | The file lacks read permissions.                               | `The file "<FILE_PATH>" is not accessible`                           |
+| **Invalid Characters in Sequence** | The input file contains characters other than `"("` and `")"`. | `Sequence contains invalid characters; only "(" and ")" are allowed` |
+| **Unexpected Encoding**            | The file is not encoded in UTF-8.                              | `The file "<FILE_PATH>" is not UTF-8 encoded`                        |
+| **Keyboard Interruption**          | The user interrupts the process (typically with `CTRL + C`).   | `Execution interrupted by user`                                      |
+| **Critical Failure**               | An unexpected error occurs.                                    | `Cause: <ERROR_MESSAGE>`                                             |
+
 
 ---
 

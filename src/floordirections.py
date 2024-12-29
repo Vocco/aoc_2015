@@ -109,7 +109,7 @@ class FloorDirectionsAnalysis:
         """
         if not FloorDirectionsAnalysis.is_valid_directions_sequence(sequence):
             raise InvalidFloorDirectionsError(
-                'Sequence contains invalid characters; only "(" and ")" are allowed.')
+                'Sequence contains invalid characters; only "(" and ")" are allowed')
         return sequence
 
     @staticmethod
