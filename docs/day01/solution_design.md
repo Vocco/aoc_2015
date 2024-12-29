@@ -84,4 +84,4 @@ This solution design ensures modularity, clarity, and maintainability. The divis
 
 ---
 
-**License**: This document is licensed under the MIT License. See the LICENSE file at the project root for details.
+**License**: This document is licensed under the **MIT License**. See the `LICENSE` file in the project root for full license details.
