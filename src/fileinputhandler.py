@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-# Copyright (c) Name Surname
+# Copyright (c) Vojtech Krajnansky
 """File reading utilities.
 
 This module provides functions and exceptions for safe reading of file contents
@@ -31,7 +31,7 @@ Requirements:
     - Python >= 3.10
 
 Author:
-    Name Surname (https://github.com/NameSurname)
+    Vojtech Krajnansky (https://github.com/Vocco)
 
 License:
     This module is licensed under the MIT License. See the LICENSE file in the project root

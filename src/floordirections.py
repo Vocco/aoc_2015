@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-# Copyright (c) Name Surname
+# Copyright (c) Vojtech Krajnansky
 """Capabilities for floor directions analysis.
 
 This module computes the final floor based on a sequence of directions.
@@ -32,7 +32,7 @@ Requirements:
     - Python >= 3.5
 
 Author:
-    Name Surname (https://github.com/NameSurname)
+    Vojtech Krajnansky (https://github.com/Vocco)
 
 License:
     This module is licensed under the MIT License. See the LICENSE file in the project root
