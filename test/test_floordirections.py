@@ -8,6 +8,7 @@ syspath.append(ospath.abspath('../'))
 from src.floordirections import FloorDirectionsAnalysis, InvalidFloorDirectionsError
 
 
+# unit tests
 def test_analysis_happy_path():
     analysis = FloorDirectionsAnalysis('((())')
     analysis.analyze()

@@ -76,7 +76,7 @@ def parse_arguments() -> Path:
     return parser.parse_args().file_path
 
 
-def _main() -> int:
+def main() -> int:
     """Main entrypoint for the program.
     
     Parses command-line arguments, reads the provided floor directions file,
@@ -115,7 +115,7 @@ def _main() -> int:
 
 if __name__ == '__main__':
     try:
-        sysexit(_main())
+        sysexit(main())
     except KeyboardInterrupt:
         notify_error('Execution interrupted by user')
         sysexit(ReturnCode.KEYBOARD_INTERRUPT)

@@ -7,6 +7,8 @@ syspath.append(ospath.abspath('../'))
 
 from src.outputhandler import notify_error, notify_success
 
+
+# unit tests
 def test_notify_error(capsys):
     test_error = 'Something went wrong'
     notify_error(test_error)

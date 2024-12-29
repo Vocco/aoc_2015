@@ -12,6 +12,7 @@ from src.fileinputhandler import (
 )
 
 
+# unit tests
 @patch.object(Path, 'exists', return_value=True)
 @patch.object(Path, 'is_file', return_value=True)
 def test_read_file_happy_path(mock_is_file, mock_exists):
