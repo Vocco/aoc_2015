@@ -1,3 +1,5 @@
+import time
+
 from os import path as ospath
 from sys import path as syspath
 
@@ -80,3 +82,14 @@ def test_analysis_only_closing_brackets():
 def test_analysis_floor_computed_without_analyze():
     analysis = FloorDirectionsAnalysis('))()((((')
     assert analysis.final_floor == 2
+
+# performance tests
+def test_analysis_large_input():
+    analysis = FloorDirectionsAnalysis(')' * 6_000_000 + '(' * 1_000_000)
+
+    start = time.perf_counter()
+    analysis.analyze()
+    end = time.perf_counter()
+
+    assert end - start < 1.0
+    assert analysis.final_floor == -5_000_000
