@@ -53,11 +53,11 @@ The task is to determine the final floor based on the provided sequence.
    - Manages argument parsing and the flow of computation.
 
 #### 1.2.3 Module Breakdown
-1. `fileinput`:
+1. `fileinputhandler`:
    - **Responsibility**: Reads input from the file.
    - **Approach**: Functional.
    - **Justification**: File reading is straightforward and stateless.
-2. `directions`:
+2. `floordirections`:
    - **Responsibility**: Analyzes the `directions` sequence.
    - **Approach**: Object-oriented.
    - **Justification**: Encapsulation of sequence properties and methods (e.g., validation, floor computation) improves modularity and reusability.
