@@ -30,7 +30,7 @@ License:
     This module is licensed under the MIT License. See the LICENSE file in the project root
     for full license text.
 """
-from sys import stderr
+import sys
 
 
 # functions
@@ -44,8 +44,8 @@ def notify_error(error: str) -> None:
         Execution failed
         Something went wrong
     """
-    print('Execution failed', file=stderr)
-    print(error, file=stderr)
+    print('Execution failed', file=sys.stderr)
+    print(error, file=sys.stderr)
 
 
 def notify_success(message: str) -> None:
