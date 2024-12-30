@@ -36,6 +36,7 @@ def test_parse_arguments_help_message():
 
 
 # component tests
+@pytest.mark.component
 @patch.object(Path, 'exists', return_value=True)
 @patch.object(Path, 'is_file', return_value=True)
 @patch.object(Path, 'open', mock_open(read_data='(()'))
@@ -52,6 +53,7 @@ def test_main_happy_path(mock_is_file, mock_exists, capsys):
     assert result == ReturnCode.SUCCESS
 
 
+@pytest.mark.component
 @patch.object(Path, 'exists', return_value=True)
 @patch.object(Path, 'is_file', return_value=False)
 def test_main_not_a_file(mock_is_file, mock_exists, capsys):
@@ -69,6 +71,8 @@ def test_main_not_a_file(mock_is_file, mock_exists, capsys):
     )
     assert result == ReturnCode.FILE_READING_ERROR
 
+
+@pytest.mark.component
 @patch.object(Path, 'exists', return_value=True)
 @patch.object(Path, 'is_file', return_value=True)
 @patch.object(Path, 'open', mock_open(read_data='(()a'))
@@ -89,6 +93,7 @@ def test_main_malformed_file(mock_is_file, mock_exists, capsys):
 
 
 # integration tests
+@pytest.mark.integration
 def test_main_block_success():
     with tempfile.NamedTemporaryFile(delete=False, mode='w', suffix='.txt') as temp_file:
         temp_file.write('())')  # Write the mock file content

@@ -13,83 +13,67 @@ from src.floordirections import FloorDirectionsAnalysis, InvalidFloorDirectionsE
 # unit tests
 def test_analysis_happy_path():
     analysis = FloorDirectionsAnalysis('((())')
-    analysis.analyze()
     assert analysis.final_floor == 1
 
     analysis = FloorDirectionsAnalysis('(()(()(')
-    analysis.analyze()
     assert analysis.final_floor == 3
 
     analysis = FloorDirectionsAnalysis('))(((((')
-    analysis.analyze()
     assert analysis.final_floor == 3
 
     analysis = FloorDirectionsAnalysis('())')
-    analysis.analyze()
     assert analysis.final_floor == -1
 
     analysis = FloorDirectionsAnalysis('))(')
-    analysis.analyze()
     assert analysis.final_floor == -1
 
     analysis = FloorDirectionsAnalysis(')())())')
-    analysis.analyze()
     assert analysis.final_floor == -3
 
 
 def test_analysis_malformed_sequence():
     with pytest.raises(InvalidFloorDirectionsError):
         analysis = FloorDirectionsAnalysis('(x()')
-        analysis.analyze()
 
 
 def test_analysis_empty_sequence():
     analysis = FloorDirectionsAnalysis('')
-    analysis.analyze()
     assert analysis.final_floor == 0
 
 
 def test_analysis_single_direction_sequence_opening():
     analysis = FloorDirectionsAnalysis('(')
-    analysis.analyze()
     assert analysis.final_floor == 1
 
 
 def test_analysis_single_direction_sequence_closing():
     analysis = FloorDirectionsAnalysis(')')
-    analysis.analyze()
     assert analysis.final_floor == -1
 
 
 def test_analysis_equal_number_of_opening_and_closing():
     analysis = FloorDirectionsAnalysis('()()')
-    analysis.analyze()
     assert analysis.final_floor == 0
 
 
 def test_analysis_only_opening_brackets():
     analysis = FloorDirectionsAnalysis('((((')
-    analysis.analyze()
     assert analysis.final_floor == 4
 
 
 def test_analysis_only_closing_brackets():
     analysis = FloorDirectionsAnalysis('))))')
-    analysis.analyze()
     assert analysis.final_floor == -4
 
 
-def test_analysis_floor_computed_without_analyze():
-    analysis = FloorDirectionsAnalysis('))()((((')
-    assert analysis.final_floor == 2
-
 # performance tests
+@pytest.mark.perf
 def test_analysis_large_input():
     analysis = FloorDirectionsAnalysis(')' * 6_000_000 + '(' * 1_000_000)
 
     start = time.perf_counter()
-    analysis.analyze()
+    result = analysis.final_floor
     end = time.perf_counter()
 
     assert end - start < 1.0
-    assert analysis.final_floor == -5_000_000
+    assert result == -5_000_000
