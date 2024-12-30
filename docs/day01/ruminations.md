@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MIT -->
+<!-- Copyright (c) Vojtech Krajnansky -->
 # Ruminations: Advent of Code 2015: Day 01
 ## Part 1
 ### 1.1 Thinking About Other Things, Like...
@@ -70,3 +72,7 @@ And of course, not all things in life can be so easily evaluated as contributing
 A stream processing approach would be a reasonable solution for this challenge, especially in the input size is expected to be extremely large. Instead of loading the entire file into memory, we could process it incrementally by reading it in chunks (a tumbling window) of characters. This would allow us to maintain a running total, to be returned once we have processed the entire file.
 
 However, for a problem as simple as this, that would definitely count as over-engineering. It is (slightly) easier and (much) more readable to simply read the entire file into memory and analyze its contents in bulk. Modern workstations typically have ample memory to handle files with millions of charactrs - even billions (as long as it's not too many billions).
+
+---
+
+**License**: This document is licensed under the **MIT License**. See the `LICENSE` file in the project root for full license details.
