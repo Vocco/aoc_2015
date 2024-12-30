@@ -23,7 +23,6 @@ Example:
     >>> from directions import FloorDirectionsAnalysis, FloorDirectionsAnalysisError
     >>> try:
     ...     analysis = FloorDirectionsAnalysis(directions_sequence)
-    ...     analysis.analyze()
     ...     print(f'Final Floor: {analysis.final_floor}')
     ... except FloorDirectionsAnalysisError as e:
     ...     print(f'An error occurred: {e}')
@@ -63,7 +62,6 @@ class FloorDirectionsAnalysis:
     Methods:
         is_valid_directions_sequence(sequence): Check if the sequence contains
             only valid floor directions.
-        analyze(): Analyze the directions sequence to compute the final floor.
 
     Example:
         >>> # get valid instructions:
@@ -76,7 +74,6 @@ class FloorDirectionsAnalysis:
         False
         >>> # analyze a directions sequence:
         >>> analysis = FloorDirectionsAnalysis('((())')
-        >>> analysis.analyze()
         >>> analysis.final_floor
         1
 
@@ -127,13 +124,6 @@ class FloorDirectionsAnalysis:
     def _compute_final_floor(self) -> int:
         """Return the final based on the directions sequence."""
         return sum(1 if char == '(' else -1 for char in self._directions)
-
-    def analyze(self) -> None:
-        """Perform a complete analysis of directions.
-
-        Computes the final floor based on the sequence.
-        """
-        self._final_floor = self._compute_final_floor()
 
     @property
     def final_floor(self) -> int:
