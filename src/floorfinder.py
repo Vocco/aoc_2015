@@ -103,7 +103,7 @@ def main() -> int:
             'Could not read input file, please verify that you have provided the correct path'
             f'\nCause: {error}'
         )
-        return ReturnCode.FILE_READING_ERROR        
+        return ReturnCode.FILE_READING_ERROR
     except FloorDirectionsAnalysisError as error:
         notify_error(
             'Malformed directions sequence,'
