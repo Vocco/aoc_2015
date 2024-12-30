@@ -70,12 +70,13 @@ class FloorDirectionsAnalysis:
         >>> # check if a sequence is a valid directions sequence:
         >>> FloorDirectionsAnalysis.is_valid_directions_sequence('(')
         True
-        >>> FloorDirectionsAnalysis.is_valid_directions_sequence('(x(')
-        False
         >>> # analyze a directions sequence:
         >>> analysis = FloorDirectionsAnalysis('((())')
         >>> analysis.final_floor
         1
+        >>> # empty instructions behavior:
+        >>> FloorDirectionsAnalysis('').final_floor
+        0
 
     Raises:
         InvalidFloorDirectionsError: If the provided sequence contains invalid characters.
@@ -118,6 +119,8 @@ class FloorDirectionsAnalysis:
             True
             >>> FloorDirectionsAnalysis.is_valid_directions_sequence('(x(')
             False
+            >>> FloorDirectionsAnalysis.is_valid_directions_sequence('')
+            True
         """
         return all(char in FloorDirectionsAnalysis.VALID_DIRECTIONS for char in sequence)
 
