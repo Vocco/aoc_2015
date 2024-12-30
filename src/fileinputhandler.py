@@ -16,7 +16,7 @@ Exceptions:
     - FileEncodingError: The file has unexpected encoding.
 
 Type Definitions:
-    - PathType: Uniont of `str` and `os.PathLike`.
+    - PathType: Union of `str` and `os.PathLike`.
 
 Example:
     >>> # read file contents:
