@@ -11,7 +11,7 @@ import pytest
 sys.path.append(ospath.abspath('../'))
 sys.path.append(ospath.abspath('../src'))
 
-from src.floorfinder import main, parse_arguments, ReturnCode
+from src.floorfinder import build_result_message, main, parse_arguments, ReturnCode
 
 
 # unit tests
@@ -35,12 +35,30 @@ def test_parse_arguments_help_message():
     assert excinfo.value.code == 0
 
 
+def test_build_result_message_happy_path():
+    mock_data = [1, 3]
+    result = build_result_message(mock_data[0], mock_data[1])
+    assert result == (
+        f'Final Floor: {mock_data[0]}\nFirst Basement Direction Position: {mock_data[1]}')
+    
+    mock_data = [-1, 2]
+    result = build_result_message(mock_data[0], mock_data[1])
+    assert result == (
+        f'Final Floor: {mock_data[0]}\nFirst Basement Direction Position: {mock_data[1]}')
+    
+
+def test_build_result_message_no_basement():
+    mock_data = [1, 0]
+    result = build_result_message(mock_data[0], mock_data[1])
+    assert result == (f'Final Floor: {mock_data[0]}\nBasement never reached in this sequence')
+
+
 # component tests
 @pytest.mark.component
 @patch.object(Path, 'exists', return_value=True)
 @patch.object(Path, 'is_file', return_value=True)
 @patch.object(Path, 'open', mock_open(read_data='(()'))
-def test_main_happy_path(mock_is_file, mock_exists, capsys):
+def test_main_happy_path_no_basement(mock_is_file, mock_exists, capsys):
     mock_args = ['script_name', 'valid_file.txt']
     with patch('sys.argv', mock_args):
         result = main()
@@ -49,6 +67,25 @@ def test_main_happy_path(mock_is_file, mock_exists, capsys):
     mock_exists.assert_called_once()
     mock_is_file.assert_called_once()
     assert 'Final Floor: 1' in captured.out
+    assert 'Basement never reached in this sequence' in captured.out
+    assert captured.err == ''
+    assert result == ReturnCode.SUCCESS
+
+
+@pytest.mark.component
+@patch.object(Path, 'exists', return_value=True)
+@patch.object(Path, 'is_file', return_value=True)
+@patch.object(Path, 'open', mock_open(read_data='(()()))'))
+def test_main_happy_path_with_basement(mock_is_file, mock_exists, capsys):
+    mock_args = ['script_name', 'valid_file.txt']
+    with patch('sys.argv', mock_args):
+        result = main()
+    captured = capsys.readouterr()
+
+    mock_exists.assert_called_once()
+    mock_is_file.assert_called_once()
+    assert 'Final Floor: -1' in captured.out
+    assert 'First Basement Direction Position: 7' in captured.out
     assert captured.err == ''
     assert result == ReturnCode.SUCCESS
 
@@ -108,4 +145,5 @@ def test_main_block_success():
 
     assert result.returncode == 0
     assert 'Final Floor: -1' in result.stdout
+    assert 'First Basement Direction Position: 3' in result.stdout
     assert result.stderr == ''

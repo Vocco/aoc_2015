@@ -80,6 +80,27 @@ def parse_arguments() -> Path:
     return parser.parse_args().file_path
 
 
+def build_result_message(final_floor: int, first_basement_position: int) -> str:
+    """Return the program reuslt message.
+    
+    Args:
+        final_floor (int): The resulting final floor number.
+        first_basement_position (int): The found position of the first instruction
+            leading to a basement floor.
+
+    Returns:
+        str: The message with which the user should be notified.
+    """
+    result_message = f'Final Floor: {final_floor}\n'
+
+    result_message += (
+        f'First Basement Direction Position: {first_basement_position}'
+            if first_basement_position else
+        'Basement never reached in this sequence'
+    )
+    return result_message
+
+
 def main() -> int:
     """Main program entry point.
     
@@ -100,10 +121,9 @@ def main() -> int:
         file_path = parse_arguments()
         file_content = read_file(file_path)
         analysis = FloorDirectionsAnalysis(file_content)
-        notify_success(
-            f'Final Floor: {analysis.final_floor}'
-            f'\nFirst basement direction position: {analysis.first_basement_direction_position}'
-        )
+        result_message = build_result_message(
+            analysis.final_floor, analysis.first_basement_direction_position)
+        notify_success(result_message)
         return ReturnCode.SUCCESS
     except FileInputError as error:
         notify_error(
