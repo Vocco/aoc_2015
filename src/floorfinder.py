@@ -2,7 +2,8 @@
 # Copyright (c) Vojtech Krajnansky
 """Santa's floor direction helper.
 
-This module computes the final floor based on a sequence of directions from a file.
+This module computes the final floor and the first direction which leads to an underground floor
+from a sequence of directions.
 Solution for Advent of Code 2015 Day 01, Part 1.
 
 Usage:
@@ -22,6 +23,7 @@ Classes:
 
 Functions:
     parse_arguments: Parses and validates command-line arguments.
+    build_result_message: Builds the resulting message to be printed out to the user.
     main: Program entry point.
 
 Requirements:
