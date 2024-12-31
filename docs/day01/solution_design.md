@@ -82,6 +82,62 @@ The task is to determine the final floor based on the provided sequence.
 ### 1.4 Summary
 This solution design ensures modularity, clarity, and maintainability. The division of responsibilities into functional and object-oriented modules helps encapsulate logic while keeping the codebase organized and extensible.
 
+## Part 2
+### 2.1 Requirements Analysis
+#### 2.1.1 Problem Statement
+Given the same sequence of `directions` as before, the task is to find the **position** of the first instruction that causes the total floor to reach `-1` (the first basement floor). If no such position exists, the result should explicitly indicate this.
+
+#### 2.1.2 Inputs (Unchanged)
+- **Input format**: A file containing a single line of `directions`.
+  - **Constraints**:
+    - File must exist and be readable.
+    - The sequence may only contain `(` and `)` characters.
+
+#### 2.1.3 Outputs
+- **Output format**: A single positive integer representing the **position** of the first instruction that leads to floor `-1`.
+  - **Constraints**:
+    - Position is indexed from `1` (the first character in a sequence has position `1`). Therefore, if such a position exists, it is a **positive integer**.
+    - If no such position exists, indicate this with a `0`, which should be translated to an appropriate message.
+
+#### 2.1.4 Edge Cases
+1. **Empty Input**: Return `0` as no directions exist.
+2. **Only `(` in the sequence**: Return `0`, as the basement is never reached.
+3. **Only `)` in the sequence**: Return `1`, as the basement is reached on the first instruction.
+4. **Basement not reached at all**: Return `0`.
+5. **Basement reached at the last instruction**: Return the length of the sequence.
+
+### 2.2 Design
+#### 2.2.1 Solution Steps
+1. **File Reading**: As before.
+2. **Input Validation**: As before.
+3. **First Basement Instruction Calculation**:
+   - Traverse the sequence while maintaining a running total of the `current_floor` as well as the `position` of each character, starting from `1`.
+   - When `current_floor` reaches `-1`, immediately return the current `position`.
+   - If no such position exists, return `0`.
+
+4. **Output Handling**:
+   - Add `first_basement_instruction` to the result output, everything else is as before.
+
+#### 2.2.2 Responsibility Domains
+1. **File Input Reading**: As before.
+2. **Sequence Analysis**:
+   - Incorporates basement detection into the validation and floor computation process.
+3. **Output Handling**: As before.
+4. **Orchestration**:
+   - Additionally ensures printing of the newly computed measure.
+
+### 2.3 Implementation Considerations
+1. **Multiple Passes Over Data**:
+   - The current solution processes the `directions` sequence twice:
+     - Once for validation.
+     - Again to compute the `final_floor`.
+   - These operations could be combined into a single pass, even with the `first_basement_instruction` calculation included.
+     - While this optimization doesn't change the overall asymptotic complexity, it reduces the constant factor in the linear complexity: from `c*n` (when the passes are separate) to `(c-2)*n`.
+     - Considering the size of the inputs, as well as readability concerns, this seems like more of an over-engineered solution than a practical improvement. It is likely not justified, and will not be included in the addition.
+
+### 2.4 Summary
+The design integrates basement detection into the solution with minimal changes to the existing flow. It prioritizes readability and maintainability over maximal optimization, while keeping the asymptotic complexity linear.
+
 ---
 
 **License**: This document is licensed under the **MIT License**. See the `LICENSE` file in the project root for full license details.
