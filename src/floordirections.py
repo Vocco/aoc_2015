@@ -15,7 +15,7 @@ Constants:
 Classes:
     FloorDirectionsAnalysis: Handles direction sequence validation and computes:
         - The final floor.
-        - The position of the first direction leading to basement (indexed from 1).
+        - The position of the first direction leading to the basement (indexed from 1).
 
 Exceptions:
     FloorDirectionsAnalysisError: The base exception for this module.
@@ -60,10 +60,10 @@ class FloorDirectionsAnalysis:
         sequence (str): The sequence of directions to analyze.
 
     Attributes:
-        VALID_DIRECTIONS (set(str)): Allowed direction characters ('(', ')').
+        VALID_DIRECTIONS (set[str]): Allowed direction characters ('(', ')').
         final_floor (int): The computed final floor.
-        first_basement_direction_position (int): The computed position of the first direction
-            leading to a basement floor, indexed from 1. If no such position is found, this is 0.
+        first_basement_direction_position (int): Position of the first direction leading
+            to a basement floor, indexed from 1. If no such position is found, this is 0.
 
     Methods:
         is_valid_directions_sequence(sequence): Check if the sequence contains

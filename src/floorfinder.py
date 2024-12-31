@@ -20,6 +20,10 @@ Constants:
 Classes:
     ReturnCode: Defines return codes for program execution.
 
+Functions:
+    parse_arguments: Parses and validates command-line arguments.
+    main: Program entry point.
+
 Requirements:
     - Python >= 3.10
 
@@ -32,8 +36,8 @@ License:
 """
 from argparse import ArgumentParser
 from enum import IntEnum
-from sys import exit as sysexit
 from pathlib import Path
+from sys import exit as sysexit
 
 
 from floordirections import FloorDirectionsAnalysis, FloorDirectionsAnalysisError
@@ -64,7 +68,7 @@ def parse_arguments() -> Path:
     """Parse command-line arguments to extract the input file path.
 
     Returns:
-        pathlib.Path: The input file path provided as an argument.
+        pathlib.Path: Path to the input file provided as an argument.
     """
     parser = ArgumentParser(description='Compute the final floor from a directions file.')
     parser.add_argument(
@@ -77,7 +81,7 @@ def parse_arguments() -> Path:
 
 
 def main() -> int:
-    """Main entrypoint for the program.
+    """Main program entry point.
     
     Parses command-line arguments, reads the provided floor directions file,
     and computes the final floor to which the sequence leads.
