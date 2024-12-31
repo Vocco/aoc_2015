@@ -52,7 +52,7 @@ def test_analysis_malformed_sequence():
 
 # performance tests
 @pytest.mark.perf
-def test_analysis_large_input():
+def test_analysis_final_floor_large_input():
     analysis = FloorDirectionsAnalysis(')' * 6_000_000 + '(' * 1_000_000)
 
     start = time.perf_counter()
@@ -61,3 +61,15 @@ def test_analysis_large_input():
 
     assert end - start < 1.0
     assert result == -5_000_000
+
+
+@pytest.mark.perf
+def test_analysis_first_basement_direction_position_large_input():
+    analysis = FloorDirectionsAnalysis('(' * 3_000_000 + ')' * 3_000_001)
+
+    start = time.perf_counter()
+    result = analysis.first_basement_direction_position
+    end = time.perf_counter()
+
+    assert end - start < 1.0
+    assert result == 6_000_001
