@@ -1,13 +1,15 @@
 <!-- SPDX-License-Identifier: MIT -->
 <!-- Copyright (c) Vojtech Krajnansky -->
 # User Guide for Santa's Floor Direction Helper
-This guide explains how to use the program to determine the final floor based on a sequence of floor directions, leveraging the provided utilities.
+This guide explains how to use the program to determine the final floor and the position of the first direction which leads to a basement floor based on a sequence of directions, leveraging the provided utilities.
 
 ## 1 Program Overview
 ### 1.1 Purpose
-The program calculates the final floor from a sequence of directions using the following rules:
-- `"("` indicates moving **up** one floor.
-- `")"` indicates moving **down** one floor.
+The program calculates:
+- The **final floor** from a sequence of directions using the following rules:
+  - `"("` indicates moving **up** one floor.
+  - `")"` indicates moving **down** one floor.
+- The **position of the first instruction leading to a basement floor** (floor -1), if such a position exists.
 
 ### 1.2 Requirements
 - Python version: **3.10 or higher**
@@ -18,7 +20,10 @@ The program consists of the following modules:
 - `floorfinder.py`:
   - Main entry point for the program. Handles argument parsing, calls supporting modules, and outputs results.
 - `floordirections.py`:
-  - Contains the logic to validate and analyze the direction sequence.
+  - Contains the logic to:
+    - Validate the direction sequence.
+    - Compute the **final floor**.
+    - Determine the **position of the first instruction leading to a basement floor**, if applicable.
 - `fileinputhandler.py`:
   - Manages file reading with robust error handling.
 - `outputhandler.py`:
@@ -42,20 +47,40 @@ Replace `<FILE>` with the path to your input file. For example:
 python floorfinder.py directions.txt
 ```
 ## 4 Example Usage
-### Input File: `directions.txt`
+### 4.1 Basement Reached
+#### Input File: `directions.txt`
 ```
-((())(
+((())()))
 ```
 
-### Command:
+#### Command:
 ```bash
 python floorfinder.py directions.txt
 ```
 
-### Output:
+#### Output:
+```text
+Execution successful
+Final Floor: -1
+First Basement Direction Position: 9
+```
+
+### 4.2 Basement Not Reached
+#### Input File: `directions.txt`
+```
+((())(
+```
+
+#### Command:
+```bash
+python floorfinder.py directions.txt
+```
+
+#### Output:
 ```text
 Execution successful
 Final Floor: 2
+Basement never reached in this sequence
 ```
 
 ## 5 Error Handling
