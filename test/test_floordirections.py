@@ -11,59 +11,43 @@ from src.floordirections import FloorDirectionsAnalysis, InvalidFloorDirectionsE
 
 
 # unit tests
-def test_analysis_happy_path():
-    analysis = FloorDirectionsAnalysis('((())')
-    assert analysis.final_floor == 1
+@pytest.mark.parametrize(
+    'input_sequence, expected_floor', [
+    ('((())', 1),
+    ('(()(()(', 3),
+    ('))(((((', 3),
+    ('())', -1),
+    ('))(', -1),
+    (')())())', -3),
+    ('', 0),
+    ('(', 1),
+    (')', -1),
+    ('()()', 0),
+    ('((((', 4),
+    ('))))', -4)
+])
+def test_analysis_final_floor(input_sequence, expected_floor):
+    analysis = FloorDirectionsAnalysis(input_sequence)
+    assert analysis.final_floor == expected_floor
 
-    analysis = FloorDirectionsAnalysis('(()(()(')
-    assert analysis.final_floor == 3
 
-    analysis = FloorDirectionsAnalysis('))(((((')
-    assert analysis.final_floor == 3
-
-    analysis = FloorDirectionsAnalysis('())')
-    assert analysis.final_floor == -1
-
-    analysis = FloorDirectionsAnalysis('))(')
-    assert analysis.final_floor == -1
-
-    analysis = FloorDirectionsAnalysis(')())())')
-    assert analysis.final_floor == -3
+@pytest.mark.parametrize(
+    'input_sequence, expected_position', [
+    (')', 1),
+    ('()())', 5),
+    ('', 0),
+    ('(', 0),
+    ('(((())()))(((', 0),
+    ('(((())())))', 11)
+])
+def test_analysis_first_basement_direction_position(input_sequence, expected_position):
+    analysis = FloorDirectionsAnalysis(input_sequence)
+    assert analysis.first_basement_direction_position == expected_position
 
 
 def test_analysis_malformed_sequence():
     with pytest.raises(InvalidFloorDirectionsError):
-        analysis = FloorDirectionsAnalysis('(x()')
-
-
-def test_analysis_empty_sequence():
-    analysis = FloorDirectionsAnalysis('')
-    assert analysis.final_floor == 0
-
-
-def test_analysis_single_direction_sequence_opening():
-    analysis = FloorDirectionsAnalysis('(')
-    assert analysis.final_floor == 1
-
-
-def test_analysis_single_direction_sequence_closing():
-    analysis = FloorDirectionsAnalysis(')')
-    assert analysis.final_floor == -1
-
-
-def test_analysis_equal_number_of_opening_and_closing():
-    analysis = FloorDirectionsAnalysis('()()')
-    assert analysis.final_floor == 0
-
-
-def test_analysis_only_opening_brackets():
-    analysis = FloorDirectionsAnalysis('((((')
-    assert analysis.final_floor == 4
-
-
-def test_analysis_only_closing_brackets():
-    analysis = FloorDirectionsAnalysis('))))')
-    assert analysis.final_floor == -4
+        FloorDirectionsAnalysis('(x()')
 
 
 # performance tests
