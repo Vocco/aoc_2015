@@ -96,7 +96,10 @@ def main() -> int:
         file_path = parse_arguments()
         file_content = read_file(file_path)
         analysis = FloorDirectionsAnalysis(file_content)
-        notify_success(f'Final Floor: {analysis.final_floor}')
+        notify_success(
+            f'Final Floor: {analysis.final_floor}'
+            f'\nFirst basement direction position: {analysis.first_basement_direction_position}'
+        )
         return ReturnCode.SUCCESS
     except FileInputError as error:
         notify_error(
