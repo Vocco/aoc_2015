@@ -65,11 +65,11 @@ def test_analysis_final_floor_large_input():
 
 @pytest.mark.perf
 def test_analysis_first_basement_direction_position_large_input():
-    analysis = FloorDirectionsAnalysis('(' * 3_000_000 + ')' * 3_000_001)
+    analysis = FloorDirectionsAnalysis('(' * 3_500_000 + ')' * 3_500_001)
 
     start = time.perf_counter()
     result = analysis.first_basement_direction_position
     end = time.perf_counter()
 
     assert end - start < 1.0
-    assert result == 6_000_001
+    assert result == 7_000_001
