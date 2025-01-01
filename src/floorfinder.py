@@ -97,7 +97,7 @@ def build_result_message(final_floor: int, first_basement_position: int) -> str:
 
     result_message += (
         f'First Basement Direction Position: {first_basement_position}'
-            if first_basement_position else
+            if first_basement_position > 0 else
         'Basement never reached in this sequence'
     )
     return result_message
