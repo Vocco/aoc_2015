@@ -73,7 +73,7 @@ Given a list of `dimensions` of presents (perfect right rectangular prisms) in t
 3. `outputhandler`:
    - **Responsibility**: Manages result or error output.
    - **Notes**: Reused from `floorfinder` solution.
-4. `floorfinder`:
+4. `ordercalc`:
    - **Responsibility**: Orchestrates the solution flow.
    - **Approach**: Functional with support from `ArgumentParser`.
    - **Justification**: Argument parsing integrates seamlessly with a functional flow for orchestrating other modules.
