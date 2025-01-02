@@ -33,26 +33,27 @@ Given a list of `dimensions` of presents (perfect right rectangular prisms) in t
      - `L`, `W`, and `H` can all be parsed into integers.
      - `L`, `W`, and `H` are all larger than `0`.
    - Handle invalid input gracefully.
-3. **Amount of Wrapping Paper per Present Calculation**
-   - For each present, compute the:
-     - `present_area` = `2*(L*W + W*H + H*L)`
-     - `slack_area` = `min(L*W, W*H, H*L)`
-     - `wrapping_paper` = `present_area + slack_area`
+3. **Tracking of Present Dimensions**:
+   - For each present, track its:
+     - `side_areas` = `[L*W, W*H, H*L]`, sorted by size
+     - `surface_area` = `2*(side_areas)`
 3. **Total Wrapping Paper Amount Calculation**:
-   - Compute the sum of all `wrapping_paper` integers.
+   - Compute the sum of all `wrapping_paper` integers, defined as:
+     - `wrapping_paper` = `present.side_areas[0] + present.surface_area`
 4. **Output Handling**:
    - Print the calculated `total_paper_area` or an error message.
 
 #### 1.2.2 Responsibility Domains
 1. **File Input Reading**:
    - Handles reading from the input file.
-2. **Present Representation**:
-   - Represents a single present.
+2. **Present Dimensions Representation**:
+   - Represents a Christmas present's dimensions.
    - Provides a method to instantiate from a string description, including validation.
-   - Provides methods to compute the area of wrapping paper needed to wrap the present.
+   - Provides methods to compute the surface area and side areas of the present.
 3. **WrappingOrder**:
    - Represents an order of wrapping paper.
-   - Provides a method to compute the entire amount of paper for a collection of presents.
+   - Provides a method to compute an amount of wrapping paper necessary for a single present.
+   - Provides a method to compute the summary amount of paper necessary for a collection of presents.
 3. **Output Handling**:
    - Prints the result or an appropriate error message.
 4. **Orchestration**:
@@ -62,12 +63,12 @@ Given a list of `dimensions` of presents (perfect right rectangular prisms) in t
 1. `fileinputhandler`:
    - **Responsibility**: Reads input from the file.
    - **Notes**: Reused from `floorfinder` solution.
-2. `present`:
-   - **Responsibility**: Represents and handles `present` data.
+2. `presentdimensions`:
+   - **Responsibility**: Represents and handles `dimensions` data.
    - **Approach**: Object-oriented.
    - **Justification**: Encapsulation of present properties and methods (e.g., validation, area computation) improves modularity and reusability.
 3. `wrappingorder`:
-   - **Responsibility**: Computes the final amount of wrapping paper to be ordered.
+   - **Responsibility**: Computes the amount of wrapping paper to be ordered.
    - **Approach**: Object-oriented.
    - **Justification**: Enables easy extensibility if additional metrics need to be computed for a collection of presents.
 3. `outputhandler`:
