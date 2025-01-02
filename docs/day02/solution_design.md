@@ -50,8 +50,8 @@ Given a list of `dimensions` of presents (perfect right rectangular prisms) in t
    - Represents a Christmas present's dimensions.
    - Provides a method to instantiate from a string description, including validation.
    - Provides methods to compute the surface area and side areas of the present.
-3. **WrappingOrder**:
-   - Represents an order of wrapping paper.
+3. **Wrapping Analysis**:
+   - Handles analysis of the wrapping paper requirements.
    - Provides a method to compute an amount of wrapping paper necessary for a single present.
    - Provides a method to compute the summary amount of paper necessary for a collection of presents.
 3. **Output Handling**:
@@ -67,14 +67,14 @@ Given a list of `dimensions` of presents (perfect right rectangular prisms) in t
    - **Responsibility**: Represents and handles `dimensions` data.
    - **Approach**: Object-oriented.
    - **Justification**: Encapsulation of present properties and methods (e.g., validation, area computation) improves modularity and reusability.
-3. `wrappingorder`:
-   - **Responsibility**: Computes the amount of wrapping paper to be ordered.
+3. `wrappinganalysis`:
+   - **Responsibility**: Computes the amount of wrapping paper necessary to wrap the presents.
    - **Approach**: Object-oriented.
    - **Justification**: Enables easy extensibility if additional metrics need to be computed for a collection of presents.
 3. `outputhandler`:
    - **Responsibility**: Manages result or error output.
    - **Notes**: Reused from `floorfinder` solution.
-4. `ordercalc`:
+4. `wrappingordercalc`:
    - **Responsibility**: Orchestrates the solution flow.
    - **Approach**: Functional with support from `ArgumentParser`.
    - **Justification**: Argument parsing integrates seamlessly with a functional flow for orchestrating other modules.
