@@ -108,8 +108,8 @@ class FloorDirectionsAnalysis:
             InvalidFloorDirectionsError: If `sequence` contains invalid characters.
         """
         self._directions = self._validate_directions_sequence(sequence)
-        self._final_floor = None
-        self._first_basement_direction_position = None
+        self._final_floor: int = None
+        self._first_basement_direction_position: int = None
 
     @staticmethod
     def _validate_directions_sequence(sequence: str) -> str:
