@@ -143,7 +143,7 @@ def read_lines(file_path: PathType) -> list[str]:
 
     try:
         with path.open('r', encoding='utf-8') as file:
-            return file.readlines()
+            return [line.strip() for line in file.readlines()]
     except PermissionError as error:
         raise NotAccessibleError(f'The file "{path}" is not accessible') from error
     except UnicodeDecodeError as error:
