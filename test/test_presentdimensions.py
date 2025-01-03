@@ -27,12 +27,36 @@ def test_present_dimensions_smallest_side_area():
     assert PresentDimensions(3, 2, 1).smallest_side_area == 2
     assert PresentDimensions(2, 2, 3).smallest_side_area == 4
     assert PresentDimensions(4, 4, 4).smallest_side_area == 16
+    assert PresentDimensions(2, 3, 4).smallest_side_area == 6
+    assert PresentDimensions(1, 1, 10).smallest_side_area == 1
 
 
 def test_present_dimensions_surface_area():
     assert PresentDimensions(3, 2, 1).surface_area == 22
     assert PresentDimensions(2, 2, 3).surface_area == 32
     assert PresentDimensions(4, 4, 4).surface_area == 96
+    assert PresentDimensions(2, 3, 4).surface_area == 52
+    assert PresentDimensions(1, 1, 10).surface_area == 42
+
+
+def test_present_dimensions_minimal_present():
+    present_dimensions = PresentDimensions(1, 1, 1)
+    assert present_dimensions.length == 1
+    assert present_dimensions.width == 1
+    assert present_dimensions.height == 1
+    assert present_dimensions.side_areas == [1, 1, 1]
+    assert present_dimensions.smallest_side_area == 1
+    assert present_dimensions.surface_area == 6
+
+
+def test_present_dimensions_skewed_present():
+    present_dimensions = PresentDimensions(1, 8000, 1)
+    assert present_dimensions.length == 1
+    assert present_dimensions.width == 8000
+    assert present_dimensions.height == 1
+    assert present_dimensions.side_areas == [1, 8000, 8000]
+    assert present_dimensions.smallest_side_area == 1
+    assert present_dimensions.surface_area == 32002
 
 
 def test_present_dimensions_negative_dimensions():
